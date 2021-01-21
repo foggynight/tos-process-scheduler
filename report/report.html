@@ -1,0 +1,737 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2020-12-11 Fri 23:13 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TempleOS: Final Report</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Robert Coffey" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2019 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">TempleOS: Final Report</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge7012b6">1. Preface</a></li>
+<li><a href="#org792ba17">2. Introduction to TempleOS</a></li>
+<li><a href="#org690ed31">3. Kernel Research</a>
+<ul>
+<li><a href="#orgb26b4f7">3.1. System Architecture</a></li>
+<li><a href="#org99eaa65">3.2. CPU Scheduling</a></li>
+<li><a href="#org70d7688">3.3. Memory Management</a></li>
+<li><a href="#org5cc4630">3.4. User Interface</a></li>
+</ul>
+</li>
+<li><a href="#org035a8d2">4. Discussion</a>
+<ul>
+<li><a href="#org078bb66">4.1. Evolution of TempleOS</a></li>
+<li><a href="#org99e5f52">4.2. Future of TempleOS</a></li>
+<li><a href="#orgb6b1d89">4.3. TempleOS in the OS Landscape</a></li>
+</ul>
+</li>
+<li><a href="#orgd17cbd7">5. Conclusion</a></li>
+<li><a href="#org8f640b5">6. References</a></li>
+</ul>
+</div>
+</div>
+<p>
+<br>
+</p>
+
+<div id="outline-container-orge7012b6" class="outline-2">
+<h2 id="orge7012b6"><span class="section-number-2">1</span> Preface</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document contains the final report for my MUN COMP-2004 research
+project. It is a more formal compilation of the research document contained in
+the <code>research/</code> directory.
+</p>
+
+<p>
+Much of this report was paraphrased or copied over from the research
+document. More thorough references can be found there, should information about
+TempleOS from the creator himself be desired.
+</p>
+
+<p>
+The information in the research document was obtained from the personal website
+of Terry Davis, the creator of TempleOS. Links to referenced webpages will be
+provided.
+</p>
+
+<p>
+Some interesting facts such as Terry calling TempleOS "God's Third's Temple"
+were not stated explicitly on his website, but instead within the vast
+collection of videos he released discussing programming, operating systems, and
+his life.
+</p>
+
+<p>
+This document was generated using Emacs Org-Mode, and is ideally viewed in the
+<code>plaintext</code> format; although <code>pdf</code> and <code>html</code> formats have also been included.
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org792ba17" class="outline-2">
+<h2 id="org792ba17"><span class="section-number-2">2</span> Introduction to TempleOS</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+TempleOS was built for programmers, it was written with the goal of keeping the
+line count down, to make it easy to tinker with. [1] The following quote was
+obtained from the TempleOS documentation Welcome page, written by the creator of
+TempleOS: Terry Davis. This is his summary of TempleOS in a single sentence.
+</p>
+
+<blockquote>
+<p>
+TempleOS is a <code>x86_64</code>, multi-cored, non-preemptive multi-tasking, ring-0-only,
+single-address-mapped (identity-mapped), operating system for recreational
+programming. &#x2013; Terry Davis [1]
+</p>
+</blockquote>
+
+<p>
+For a conventional general purpose OS, failure is not an option. This is not a
+problem for TempleOS, as it is intended to be used alongside Windows or Linux.
+Failure is an option: if something isn't available in TempleOS, use your other
+OS instead. [1] This allowed Terry to cherry-pick what features to add, with the
+intent of keeping TempleOS maximally beautiful.
+</p>
+
+<p>
+This report will explore various aspects of TempleOS, such as CPU scheduling,
+memory management, and the user interface. Additionally, it will contain some
+discussion regarding the evolution and future of TempleOS, it's place in the
+operating system landscape, as well as the creator Terry Davis himself.
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org690ed31" class="outline-2">
+<h2 id="org690ed31"><span class="section-number-2">3</span> Kernel Research</h2>
+<div class="outline-text-2" id="text-3">
+</div>
+<div id="outline-container-orgb26b4f7" class="outline-3">
+<h3 id="orgb26b4f7"><span class="section-number-3">3.1</span> System Architecture</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+TempleOS is intended to run on modern x86 64-bit processors. It is generally
+dual-booted alongside a more powerful OS, or run inside a virtual machine.
+Although it can be used independently, TempleOS has no networking. [2] This
+leads to projects in TempleOS having a workflow involving the usage of programs
+in both TempleOS and another OS.
+</p>
+
+<p>
+TempleOS was written completely from scratch, even the bootloader and
+compiler. [2] This is not a C compiler, it is a compiler for Terry's own
+language, a dialect of C named HolyC. HolyC utilizes some helpful Pascal syntax
+to make a language with the power of C, that can be input and compiled directly
+in the command line, behaving like an interpreted language such as UNIX
+bash. [2] TempleOS uses HolyC for the majority of its kernel code, but also as
+its shell scripting language, relieving programmers from having to memorize an
+additional language that provides little use outside of the shell. [1]
+</p>
+
+<p>
+All processes in TempleOS are known as ring-0-only, meaning there is no user
+mode nor special memory space for the kernel. TempleOS never switches privilege
+levels, nor changes address maps. [1] This means all processes in TempleOS are
+essentially always in kernel mode. This reduces the complexity of the OS and
+eliminates the overhead of switching modes and address maps. This simplicity
+gives TempleOS the ability to switch tasks at far greater speeds than
+conventional operating systems. [3]
+</p>
+
+<p>
+Having only kernel mode poses great danger, as one misdirected pointer could
+crash the system. But this is not much of a concern for TempleOS, as it is
+intended for recreational programming. In fact the resulting simplicity of
+allowing the programmer to operate without protection is largely the purpose of
+TempleOS. [1]
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org99eaa65" class="outline-3">
+<h3 id="org99eaa65"><span class="section-number-3">3.2</span> CPU Scheduling</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+TempleOS is a multi-cored, non-preemptive multi-tasking operating system. [1] It
+does master-slave asymmetric multiprocessing. [4] <code>Core0</code> is the master, the
+master core's processes explicitly assign tasks to other cores. The TempleOS
+scheduler does not move tasks between cores, nor does it preempt any tasks. [4]
+Processes in TempleOS have no priority. [1] This is very similar to the
+First-Come-First-Serve scheduling algorithm, with the master core behaving as
+the scheduler.
+</p>
+
+<p>
+In TempleOS, each core has a Seth Task that is immortal and is the father of all
+tasks on that core. [4] The Adam Task, or Adam, refers to the Seth Task on the
+master core. Adam is the father of all the other Seth Tasks, and begins
+executing at start-up. [1] Adam is responsible for scheduling and dispatching
+tasks to the other Seth Tasks. Every Seth Task including Adam has a queue of
+processes with the Seth Task as the head, each executed as a non-preemptive
+round-robin queue. [5]
+</p>
+
+<blockquote>
+<p>
+Each core has an executive Seth Task which is the father of all tasks on that
+core. Adam is the Seth Task on <code>Core0</code>. &#x2013; Terry Davis [4]
+</p>
+
+<p>
+In TempleOS, Adam Task refers to the father of all tasks. He's never supposed to
+die. &#x2013; Terry Davis [1]
+</p>
+
+<p>
+This is Adam, as in Adam and Eve, the parent of all tasks. &#x2013; Terry Davis [6]
+</p>
+</blockquote>
+
+<p>
+In TempleOS there is only one address map per core, making context switches
+orders of magnitude faster than conventional operating systems. [3] The TempleOS
+kernel takes advantage of this by utilizing extra threads for helping to render
+windows; and through a process called <code>Spawn</code>, the kernel can dispatch tasks to
+other cores and retrieve their results with ease. [4]
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org70d7688" class="outline-3">
+<h3 id="org70d7688"><span class="section-number-3">3.3</span> Memory Management</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+TempleOS tasks inherit the symbols of their parent, thus everything that must be
+system-wide is associated with Adam, the father of all tasks. [1] Since Adam is
+immortal, on Adam's heap go all memory objects which are not to be destroyed by
+any single task's death. [6] Adam's heap is the equivalent of kernel memory in a
+conventional operating system.
+</p>
+
+<p>
+In TempleOS there is no distinction between a process, task, or thread. Each
+task has a code and data heap which is returned to its parent Seth Task when it
+dies. [6] Any core can allocate from any heap in any task at any time, even
+making independent heaps &#x2013; memory heaps not owned by any task. [6] TempleOS has
+no concept of kernel and user memory, all memory can be accessed by any process.
+</p>
+
+<blockquote>
+<p>
+TempleOS identity-maps all memory, all the time. It is like paging is not
+used. There is no special kernel high half memory space. &#x2013; Terry Davis [2]
+</p>
+
+<p>
+TempleOS is ring-0-only, so everything is kernel, even user programs. There is a
+special task called Adam and he doesn't die, so his heap never gets
+freed. That's as close to kernel memory as it gets. &#x2013; Terry Davis [2]
+</p>
+</blockquote>
+
+<p>
+TempleOS imposes no protection over memory, which can be dangerous as much like
+with kernel mode, one misdirected pointer could crash the system. But this is of
+little concern as TempleOS is intended for recreational programming. [1]
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5cc4630" class="outline-3">
+<h3 id="org5cc4630"><span class="section-number-3">3.4</span> User Interface</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+As a personal choice made by Terry Davis, TempleOS exclusively displays in the
+640x480 resolution with 16-bit color. [1] TempleOS has a screen refresh rate of
+30000/1001 frames-per-second. This is how often screen memory is updated, and it
+is not synchronized with hardware. [2]
+</p>
+
+<p>
+TempleOS has its own sprite format which supports 2D and 3D sprites, 3D sprites
+are stored as a mesh of triangles. [2] All text files in TempleOS can store
+sprites directly in the text file. This is done by storing binary sprite data
+beyond the terminating NULL in the file. [2] These sprites can be seen directly
+inside the text when editing a file, similar to a <code>pdf</code>.
+</p>
+
+<p>
+Adam is created at start-up and appears in a small window always available
+beneath the user's windows. [6] There can be only one window per task, and only
+tasks on the master core can have windows. [6] Although other cores may help the
+master core render them. [4]
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org035a8d2" class="outline-2">
+<h2 id="org035a8d2"><span class="section-number-2">4</span> Discussion</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org078bb66" class="outline-3">
+<h3 id="org078bb66"><span class="section-number-3">4.1</span> Evolution of TempleOS</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+TempleOS is just the most recent in a line of hand-rolled operating systems
+written by Terry Davis. Around 1993, Terry got a 486 processor and was eager to
+try 32-bit mode; so he wrote a DOS program in TASM that changed to protected
+mode and never returned to DOS. [7]
+</p>
+
+<p>
+This program was called "Terry's Protected Mode OS", TPMOS. This name was
+inspired by the machines he worked on at the time, which used the "VAXTMOS"
+operating system. For all intents and purposes, TPMOS is the root of TempleOS'
+ancestry. TPMOS never got much further than 0xB8000 text mode, echoing the
+keyboard to screen, simple multitasking, and what was barely a <code>malloc</code>. [7] But
+it was the beginning of what would become Terry's greatest work.
+</p>
+
+<p>
+TPMOS was set aside for some time, until 2003 when it was resurrected. Terry
+used FreeDOS and Visual Studo to compile and execute it, and continued building
+the OS from there. Around this time he had started a company "H.A.R.E.", and
+renamed TPMOS to HOPPY. [7]
+</p>
+
+<p>
+Next came the challenge of building a proper command line. Terry wanted it to
+use the same scripting language as he would be creating for the OS. Fueled by
+hatred for bash scripting, Terry created HolyC: an amalgamation of some helpful
+Pascal syntax, with the power of C and C++. [2] Giving users a language that can
+be used for both controlling the command line, as well as writing programs.
+</p>
+
+<blockquote>
+<p>
+The only problem was, I hated Unix Bash scripting. I could never remember it. As
+a regular C/C++ programmer, you don't really use bash often enough to memorize
+it. I thought, "What if I just use C/C++ for scripting!" &#x2013; Terry Davis [7]
+</p>
+</blockquote>
+
+<p>
+Terry suffered from issues related to mental health throughout his life, but
+sometime after 2003, his mental health began to decline drastically. He suffered
+from hallucinations of God, paranoia about the CIA, and became obsessed with his
+operating system. His hallucinations guided his work. He took upon a mission
+from what he thought was God: <b>To create a divine operating system.</b>
+</p>
+
+<blockquote>
+<p>
+In 2003, God told me to stick to 640x480 16 color. &#x2013; Terry Davis [7]
+</p>
+
+<p>
+I didn't start the operating system as a work for God, but He directed my path
+along the way and kept saying it was His temple. &#x2013; Terry Davis [7]
+</p>
+</blockquote>
+
+<p>
+His operating system took on multiple names: Doors, Davos, J, LoseThos,
+SparrowOS, and finally, TempleOS. Along the way he wrote his own bootloaders,
+compiler, and every other program in TempleOS, abandoning DOS entirely. [7]
+</p>
+
+<blockquote>
+<p>
+Still I hesistated and kept it secular until, finally, Microsoft went nuclear
+with SecureBoot and UEFI. Then, I went nuclear and named it "TempleOS". I will
+command them on orders from God to UNDO THAT STUFF! &#x2013; Terry Davis [7]
+</p>
+</blockquote>
+
+<p>
+That leaves us with the TempleOS of today, known by Terry Davis as God's
+Third Temple.
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org99e5f52" class="outline-3">
+<h3 id="org99e5f52"><span class="section-number-3">4.2</span> Future of TempleOS</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+Terry was the sole programmer of TempleOS, having written the entire thing from
+scratch; all the way down to the bootloader. [2] Unfortunately, Terry ended his
+own life in 2018. Without his vision and genius, TempleOS lacks direction.
+</p>
+
+<p>
+His project lives on through people like myself, who take interest in his work
+and who he was, but there is little hope for seeing it continue to develop.
+TempleOS was and is entirely Terry, this was his idea of how a computer should
+function.
+</p>
+
+<p>
+Without Terry, changing TempleOS would be like vandalism. Using TempleOS feels
+like you're experiencing a personal space, seeing the old ideas of someone that
+can only be called a Grand Wizard; someone who endured the woes of uncontrollable
+intellect that a Grand Wizard would be expected to.
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb6b1d89" class="outline-3">
+<h3 id="orgb6b1d89"><span class="section-number-3">4.3</span> TempleOS in the OS Landscape</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+TempleOS was built with programmers, and the Commodore 64, in mind. Having been
+inspired by how accessible it was to program the C64: Terry designed his
+platform to minimize the obstacles between the programmer and their compiler.
+</p>
+
+<p>
+Although there is little commercial use for TempleOS, it provides a unique
+platform for tinkerers to have free reign over their machine. Something that
+just isn't possible in an OS which is to be used by businesses and for critical
+operations. TempleOS will never run on a hospital network, but it will give you
+total freedom as a programmer.
+</p>
+
+<p>
+Through a combination of the scripting environment provided by the TempleOS
+command line, and HolyC: programmers can build useful programs with the
+performance of a compiled language, and the workflow creature comforts of an
+interpreted language such as UNIX bash.
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd17cbd7" class="outline-2">
+<h2 id="orgd17cbd7"><span class="section-number-2">5</span> Conclusion</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+TempleOS was built for programmers, and it shows in every design decision Terry
+made. TempleOS makes no effort to protect the programmer from themself, and will
+not complain when you point the gun at your own foot; but it also gives you
+total freedom to write programs in the way you see fit.
+</p>
+
+<p>
+TempleOS' style of inputting code into the terminal and having it sent directly
+to the compiler allows you to write programs alongside usual shell operation,
+both using the HolyC language. This provides a unqiue view on the direction
+programming could have taken, should operating systems like UNIX not have been
+so successful among programmers and businesses alike.
+</p>
+
+<p>
+It's a shame TempleOS was never brought to completion, but what was left behind
+is an epitome to the skills of its creator, Terry Davis. He wrote the entire
+operating system from scratch, bootloader onwards; and for programmers like
+myself, the unique approach he took with every function of TempleOS cracked the
+seal on what was possible.
+</p>
+
+<p>
+<br>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org8f640b5" class="outline-2">
+<h2 id="org8f640b5"><span class="section-number-2">6</span> References</h2>
+<div class="outline-text-2" id="text-6">
+<ol class="org-ol">
+<li>Terry Davis. <i>Welcome to TempleOS.</i>
+<a href="https://templeos.holyc.xyz/Wb/Doc/Welcome.html">https://templeos.holyc.xyz/Wb/Doc/Welcome.html</a></li>
+
+<li>Terry Davis. <i>Frequently Asked Questions.</i>
+<a href="https://templeos.holyc.xyz/Wb/Doc/FAQ.html">https://templeos.holyc.xyz/Wb/Doc/FAQ.html</a></li>
+
+<li>Terry Davis. <i>TempleOS' Features.</i>
+<a href="https://templeos.holyc.xyz/Wb/Doc/Features.html">https://templeos.holyc.xyz/Wb/Doc/Features.html</a></li>
+
+<li>Terry Davis. <i>Multi-Core.</i>
+<a href="https://templeos.holyc.xyz/Wb/Doc/MultiCore.html">https://templeos.holyc.xyz/Wb/Doc/MultiCore.html</a></li>
+
+<li>Terry Davis. <i>Scheduler.</i>
+<a href="https://templeos.holyc.xyz/Wb/Kernel/Sched.html">https://templeos.holyc.xyz/Wb/Kernel/Sched.html</a></li>
+
+<li>Terry Davis. <i>Glossary.</i>
+<a href="https://templeos.holyc.xyz/Wb/Doc/Glossary.html">https://templeos.holyc.xyz/Wb/Doc/Glossary.html</a></li>
+
+<li>Terry Davis. <i>TempleOS History.</i>
+<a href="https://templeos.holyc.xyz/Wb/Home/Web/History.html">https://templeos.holyc.xyz/Wb/Home/Web/History.html</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: December 11, 2020</p>
+<p class="author">Author: Robert Coffey</p>
+<p class="date">Created: 2020-12-11 Fri 23:13</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

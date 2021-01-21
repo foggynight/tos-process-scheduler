@@ -1,0 +1,16 @@
+# Example input file.
+#
+# Data is delimited by commas, CSV format.
+# Empty lines or lines beginning with '#' are ignored.
+#
+# Columns:
+# - Process number
+# - Arrival time (ms)
+# - Priority
+# - CPU burst time (ms)
+# - Total bursts
+# - Memory size (kb)
+
+P1,0,2,8,,
+P2,30,8,13,,
+P3,47,3,10,,
